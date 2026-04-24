@@ -21,17 +21,6 @@ func NewItemHandler(service service.ItemService) *ItemHandler {
 	return &ItemHandler{service: service}
 }
 
-func (h *ItemHandler) RegisterRoutes(router *gin.Engine) {
-	group := router.Group("/api/v1/items")
-	{
-		group.POST("", h.Create)
-		group.GET("", h.List)
-		group.GET("/:id", h.GetByID)
-		group.PUT("/:id", h.Update)
-		group.DELETE("/:id", h.Delete)
-	}
-}
-
 func (h *ItemHandler) Create(c *gin.Context) {
 	var input models.CreateItemInput
 	if err := c.ShouldBindJSON(&input); err != nil {

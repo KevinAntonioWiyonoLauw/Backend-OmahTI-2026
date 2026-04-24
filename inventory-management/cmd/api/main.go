@@ -11,6 +11,7 @@ import (
 
 	"inventory-management/internal/handler"
 	"inventory-management/internal/repository"
+	"inventory-management/internal/routes"
 	"inventory-management/internal/service"
 	"inventory-management/pkg/config"
 	"inventory-management/pkg/database"
@@ -50,7 +51,7 @@ func main() {
 		utils.Error(c, http.StatusNotFound, "route tidak ditemukan", nil)
 	})
 
-	itemHandler.RegisterRoutes(router)
+	routes.Register(router, itemHandler)
 
 	srv := &http.Server{
 		Addr:              ":" + cfg.AppPort,
